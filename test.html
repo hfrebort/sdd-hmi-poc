@@ -1,0 +1,44 @@
+<!doctype html>
+<html ng-app="plunker">
+    <head>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.js"></script>
+        <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.4.0.js"></script>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class='container-fluid' ng-controller="TypeaheadCtrl">
+            <pre>Model: {{selected| json}}</pre>
+            <pre>{{states}}</pre>
+            <input type="text" ng-change="onedit()" ng-model="selected" typeahead="u for u in users | filter:$viewValue">
+        </div>
+        
+        <!-- onedit do the autocomplete -->
+		<div class="row">
+			<div class="col-md-12">
+				<input class="form-control input-sm" type="text" data-ng-change="onedit()" data-ng-model="selectedUser" typeahead="u for u in users ">
+			</div>
+		</div>
+        
+        <script type="text/javascript">
+        angular.module('plunker', ['ui.bootstrap']);
+
+        function TypeaheadCtrl($scope) {
+          var users = [{name:"andi"},{name:"babsi"},{name:"conny"},{name:"doris"},{name:"emil"}];
+          $scope.selected = undefined;
+          $scope.users = [];
+
+          $scope.onedit = function(){
+              $scope.users = [];
+
+              for(var i = 0; i < users.length ; i++){
+                if (users[i].indexOf($scope.selectedUser) == 0) {
+              	  $scope.users.push(users[i]);
+                }
+              }
+            };
+            
+            var users = ["andi","babsi","conny","conny1","conny2","conny3","doris","emil"];
+        }
+        </script>
+    </body>
+</html>

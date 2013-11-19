@@ -1,0 +1,52 @@
+th, td {
+	text-align: left;
+	font-size: 12px;
+	cursor: pointer;
+}
+
+label {
+	font-size: 12px;
+	margin-bottom: 0px;
+}
+
+th input[type=checkbox] {
+	margin-bottom:-6px;
+}
+.navbar {
+	margin-bottom: 3px;
+}
+
+.tool-bar {
+	margin-top: 55px;
+	padding-left: 15px;
+	padding-bottom: 3px;
+	
+}
+
+#sddHmiBodyLeftTabs>ul,#sddHmiBodyLeftTabs>div {
+	padding-left: 15px;
+}
+
+#sddHmiBodyRightTabs>ul,#sddHmiBodyRightTabs>div {
+	padding-left: 15px;
+	padding-right: 5px;
+}
+
+.tab-content {
+	padding-top: 15px;
+}
+
+.table > thead > tr > th {
+	padding-top: 0px;
+}
+
+.required {
+	color: red;
+}
+
+.busyIndicator {
+	background: url(images/busy-indicator.gif);
+	background-repeat: no-repeat;
+	background-position:center center;
+	height: 200px;
+}

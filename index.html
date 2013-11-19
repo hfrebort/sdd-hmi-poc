@@ -1,0 +1,91 @@
+<!doctype html>
+<html data-ng-app="sddApp">
+<head>
+<title>SDD HMI Prototype</title>
+<!-- Latest compiled and minified CSS -->
+	<link href="Content/dist/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="Content/dist/css/bootstrap-theme.min.css" rel="stylesheet"  />
+	<link href="Content/style.css" rel="stylesheet" />
+</head>
+<body data-ng-controller="ViewController">
+	<nav class="navbar navbar-inverse navbar-fixed-top" id="sddHmiNavigation">
+		<div class="navbar-header">
+			<a class="navbar-brand" ui-sref="index" href="#">SDO 5.1</a>
+		</div>
+		<div ui-view="navigation"></div>
+	</nav>
+	<div class="row tool-bar">
+		<div class="col-md-12">
+			<button type="button" class="btn btn-sm" data-ng-click="addView('New *')"><span class="glyphicon glyphicon-file"></span></button>
+			<button type="button" class="btn btn-sm"><span class="glyphicon glyphicon-edit"></span></button>
+			<button type="button" class="btn btn-sm"><span class="glyphicon glyphicon-save"></span></button>
+		</div>
+	</div>
+	
+	<div id="sddHmiBody" class="row">
+		<div id="sddHmiBodyLeft" class="col-md-4">
+			<div id="sddHmiBodyLeftTabs">
+				<ul class="nav nav-tabs">
+					<li class="active">
+					<a href="#parametersetSearchId"
+						data-toggle="tab">Parameter Sets &nbsp;
+							<button type="button" class="close" aria-hidden="true">&times;</button>
+					</a></li>
+				</ul>
+				<div class="tab-content">
+					<div id="parametersetSearchId" class="tab-pane active">
+							<div ui-view="parameterSearch"></div>						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<div id="sddHmiBodyRightTabs">
+				<ul id="sddHmiBodyRightNav" class="nav nav-tabs">
+					<li class="active">
+						<a href="#welcomeScreenId" data-toggle="tab">Welcome</a>
+					</li>
+					<li data-ng-repeat="view in views">
+						<a href="#view{{view.viewId}}" data-toggle="tab">
+						<span data-ng-bind="view.parameterSet.name"></span> &nbsp;
+						<button type="button" class="close" aria-hidden="true" data-ng-click="removeView(view.viewId)">&times;</button>
+						</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div id="welcomeScreenId" class="tab-pane active">
+						<div ui-view="welcome"></div>				
+					</div>
+					<div data-ng-repeat="view in views" id="view{{view.viewId}}" class="tab-pane">
+						<div ui-view="parameterset"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+    <!-- Vendor Libs -->
+    <script type="text/javascript" src="Scripts/angular.js"></script>
+ 	<script type="text/javascript" src="Scripts/angular-ui-router.js"></script>   
+
+    <!-- UI Libs -->
+	<script type="text/javascript" src="Scripts/position.js"></script>    
+	<script type="text/javascript" src="Scripts/datepicker.js"></script>    
+	<script type="text/javascript" src="Scripts/dropdownToggle.js"></script>    
+	<script type="text/javascript" src="Scripts/tabs.js"></script>
+	    
+    <!-- App libs -->
+    <script type="text/javascript" src="app/app.js"></script>
+    <script type="text/javascript" src="app/controllers/controllers.js"></script>
+    <script type="text/javascript" src="app/controllers/navigationController.js"></script>
+    <script type="text/javascript" src="app/controllers/viewController.js"></script>
+    <script type="text/javascript" src="app/controllers/parameterSearchController.js"></script>
+    <script type="text/javascript" src="app/controllers/messageController.js"></script>
+    <script type="text/javascript" src="app/services/parametersetService.js"></script>
+    <script type="text/javascript" src="app/services/navigationService.js"></script>
+    <script type="text/javascript" src="app/services/messageService.js"></script>
+    <script type="text/javascript" src="app/services/domainService.js"></script>
+    <script type="text/javascript" src="app/services/viewService.js"></script>
+	
+</body>
+</html>

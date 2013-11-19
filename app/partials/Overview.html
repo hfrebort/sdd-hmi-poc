@@ -1,0 +1,41 @@
+	<div id="sddHmiBody" class="row">
+		<div id="sddHmiBodyLeft" class="col-md-4">
+			<div id="sddHmiBodyLeftTabs">
+				<ul class="nav nav-tabs">
+					<li class="active">
+					<a href="#parametersetSearchId"
+						data-toggle="tab">Parameter Sets &nbsp;
+							<button type="button" class="close" aria-hidden="true">&times;</button>
+					</a></li>
+				</ul>
+				<div class="tab-content">
+					<div id="parametersetSearchId" class="tab-pane active">
+							<div ui-view="parameterSearch"></div>						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<div id="sddHmiBodyRightTabs">
+				<ul id="sddHmiBodyRightNav" class="nav nav-tabs">
+					<li class="active">
+						<a href="#welcomeScreenId" data-toggle="tab">Welcome</a>
+					</li>
+					<li data-ng-repeat="view in views">
+						<a href="#view{{view.viewId}}" data-toggle="tab">
+						{{view.viewName}} &nbsp;
+						<button type="button" class="close" aria-hidden="true" data-ng-click="removeView(view.viewId)">&times;</button>
+						</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div id="welcomeScreenId" class="tab-pane active">
+						<div ui-view="welcome"></div>				
+					</div>
+					<div data-ng-repeat="view in views" id="view{{view.viewId}}">
+						<div ui-view="{{view.viewName}}"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

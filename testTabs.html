@@ -1,0 +1,68 @@
+<!doctype html>
+<html ng-app="plunker">
+<head>
+<!-- Latest compiled and minified CSS -->
+<link href="Content/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="Content/dist/css/bootstrap-theme.min.css" rel="stylesheet" />
+<link href="Content/style.css" rel="stylesheet" />
+
+<script src="Scripts/angular.js"></script>
+
+<!-- UI Libs -->
+<script src="Scripts/tabs.js"></script>
+</head>
+<body>
+	<div ng-controller="TabsDemoCtrl">
+		<button class="btn btn-small" ng-click="items[0].active = true">
+			Select item 1, using active binding</button>
+		<button class="btn btn-small"
+			ng-click="items[1].disabled = !items[1].disabled">
+			Enable/disable item 2, using disabled binding</button>
+		<br />
+		<tabset> 
+			<tab heading="Tab 1">First Tab</tab> 
+			<tab select="alertMe()"> 
+				<tab-heading><i class="icon-bell"></i> Alert me!
+				</tab-heading> 
+				Second Tab, with alert callback	and html heading! 
+			</tab> 
+			<tab ng-repeat="item in items"
+				heading="{{item.title}}" disabled="item.disabled"
+				active="item.active"> {{item.content}} 
+			</tab> 
+		</tabset>
+	</div>
+
+	<script type="text/javascript">
+		angular.module('plunker', [ 'ui.bootstrap.tabs' ]).controller(
+				'TabsDemoCtrl', function TabsDemoCtrl($scope, $http) {
+					$http({method: 'GET', url: 'app/partials/WelcomeView.html'})
+					.success(function(data){
+						console.log('alles da: ' + data);
+						$scope.items.push({
+							title : "Search",
+							content: data.toString()
+						});
+					})
+					.error(function(data, status, headers, config) {
+						console.log('alles hin' + status);
+					});
+					
+					$scope.items = [ {
+						title : "Dynamic Title 1",
+						content : "Dynamic Item 0"
+					}, {
+						title : "Dynamic Title 2",
+						content : "Dynamic Item 1",
+						disabled : true
+					} ];
+
+					$scope.alertMe = function() {
+						setTimeout(function() {
+							alert("You've selected the alert tab!");
+						});
+					};
+				});
+	</script>
+</body>
+</html>

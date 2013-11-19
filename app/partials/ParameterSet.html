@@ -1,0 +1,400 @@
+<form name="psForm">
+<div id="parameterTabs">
+	<ul id="parameterTabsNav" class="nav nav-tabs">
+		<li class="active"><a href="#parameterGeneralId" data-toggle="tab">General</a></li>
+		<li><a href="#parameterSubscribersId" data-toggle="tab">Subscribers</a></li>
+		<li><a href="#parameterAirspacesId" data-toggle="tab">Airspaces</a></li>
+		<li><a href="#parameterFeatureTypesId" data-toggle="tab">Feature types</a></li>
+		<li><a href="#parameterDownloadId" data-toggle="tab">Download</a></li>
+	</ul>
+	<div class="tab-content">
+		<div id="parameterGeneralId" class="tab-pane active">
+			<div class="row">
+				<div class="col-md-4">
+					<label>{{domainSystem.domainName}}:</label>
+					<select class="form-control input-sm">		
+						<option data-ng-repeat="domain in domainSystem.domainValues" value="{{domain.value}}">{{domain.value}} - {{domain.meaning}}</option>
+					</select>
+				</div>
+				<div class="col-md-4">
+					<label>{{domainFileFormat.domainName}}:</label>
+					<select class="form-control input-sm">		
+						<option data-ng-repeat="domain in domainFileFormat.domainValues " value="{{domain.value}}">{{domain.value}} - {{domain.meaning}}</option>
+					</select>
+				</div>
+				<div class="col-md-4">
+					<label>{{domainVersion.domainName}}:</label>
+					<select class="form-control input-sm">		
+						<option data-ng-repeat="domain in domainVersion.domainValues " value="{{domain.value}}">{{domain.value}} - {{domain.meaning}}</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div id="psgName" class="col-md-4">
+					<label>Name:</label><input class="form-control input-sm" data-ng-model="parameterSet.name" require />	
+				</div>
+				<div class="col-md-4">
+					<label>{{domainTimesliceType.domainName}}:</label>
+					<select class="form-control input-sm">		
+						<option data-ng-repeat="domain in domainTimesliceType.domainValues " value="{{domain.value}}">{{domain.value}} - {{domain.meaning}}</option>
+					</select>
+				</div>
+				<div class="col-md-4">
+					<label>{{domainDataStatus.domainName}}:</label>
+					<select class="form-control input-sm">		
+						<option data-ng-repeat="domain in domainDataStatus.domainValues " value="{{domain.value}}">{{domain.value}} - {{domain.meaning}}</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div id="psgEffectiveDateStart" class="col-md-4">
+					<label>Effective date start:</label><input id="psgEffectiveDateStartValue" class="form-control input-sm" />	
+				</div>
+				<div id="psgEffectiveDateEnd" class="col-md-4">
+					<label>Effective date end:</label><input id="psgEffectiveDateEndValue" class="form-control input-sm" />	
+				</div>
+				<div id="psgEffectiveDateRelative" class="col-md-4">
+					<label>Effective date relative:</label><input id="psgEffectiveDateRelativeValue" class="form-control input-sm" />	
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<label>{{domainDeliveryType.domainName}}:</label>
+					<select class="form-control input-sm">		
+						<option data-ng-repeat="domain in domainDeliveryType.domainValues " value="{{domain.value}}">{{domain.value}} - {{domain.meaning}}</option>
+					</select>
+				</div>
+				<div class="col-md-4">
+					<label>{{domainDeliveryFrequency.domainName}}:</label>
+					<select class="form-control input-sm">		
+						<option data-ng-repeat="domain in domainDeliveryFrequency.domainValues " value="{{domain.value}}">{{domain.value}} - {{domain.meaning}}</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div id="psgDeliveryDateStart" class="col-md-4">
+					<label>Delivery date start:</label><input id="psgDeliveryDateStartValue" class="form-control input-sm" />	
+				</div>
+				<div id="psgDeliveryDateEnd" class="col-md-4">
+					<label>Delivery date end:</label><input id="psgDeliveryDateEndValue" class="form-control input-sm" />	
+				</div>
+				<div id="psgDeliveryDeviation" class="col-md-4">
+					<label>Delivery deviation in days:</label><input id="psgDeliveryDeviationValue" class="form-control input-sm" />	
+				</div>
+			</div>
+			<div class="row">
+				<div id="psgDescription" class="col-md-12">
+					<label>Description:</label><textarea id="psgDescription" class="form-control input-sm" rows="3"></textarea>	
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-4">
+					<div class="checkbox">
+						<label><input id="psgActive" type="checkbox" value="" />Active</label>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="checkbox">
+						<label><input id="psgOutsideReference" type="checkbox" value="" />Outside reference</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="parameterSubscribersId" class="tab-pane">
+			<div class="row">
+				<div class="col-md-5">
+					<label>User name:</label>
+					<input id="filter{{pageId}}" class="form-control" /> 
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5">
+					<label>Login name:</label>
+					<div class="input-group input-group-sm">
+						<input id="filter{{pageId}}" class="form-control" /> 
+						<span class="input-group-btn">
+							<button class="btn btn-default search" id="filterSearchButton{{pageId}}" type="button">
+								<span class="glyphicon glyphicon-search">&nbsp;</span>Search
+							</button>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5">
+					<label>Subscribers:</label> 
+					<select id="selectableValues{{pageId}}" class="form-control input-xs" multiple="multiple" size="10">
+					</select>
+				</div>
+				<div class="col-md-2">
+					<div class="row"><span>&nbsp;</span></div>
+					<div class="row">
+						<button class="btn btn-sm col-md-offset-5" type="button"><span class="glyphicon glyphicon-fast-forward"></span></button>
+					</div>
+					<div class="row"><span>&nbsp;</span></div>
+					<div class="row">
+						<button class="btn btn-sm col-md-offset-5" type="button"><span class="glyphicon glyphicon-forward"></span></button>
+					</div>
+					<div class="row"><span>&nbsp;</span></div>
+					<div class="row">
+						<button class="btn btn-sm col-md-offset-5" type="button"><span class="glyphicon glyphicon-backward"></span></button>
+					</div>
+					<div class="row"><span>&nbsp;</span></div>
+					<div class="row">
+						<button class="btn btn-sm col-md-offset-5" type="button"><span class="glyphicon glyphicon-fast-backward"></span></button>
+					</div>
+				</div>
+				<div class="col-md-5">
+					<label>Assigned Subscribers:</label> 
+					<select id="assignedValues{{pageId}}" class="form-control input-xs" multiple="multiple" size="10">
+					</select>
+				</div>
+			</div>
+		</div>
+		<div id="parameterAirspacesId" class="tab-pane">
+			<div class="row">
+				<div class="col-md-5">
+					<label>Airspace type:</label>
+					<input id="filter{{pageId}}" class="form-control" /> 
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5">
+					<label>Airspace id:</label>
+					<div class="input-group input-group-sm">
+						<input id="filter{{pageId}}" class="form-control" /> 
+						<span class="input-group-btn">
+							<button class="btn btn-default search" id="filterSearchButton{{pageId}}" type="button">
+								<span class="glyphicon glyphicon-search">&nbsp;</span>Search
+							</button>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5">
+					<label>Airspaces:</label> 
+					<select id="selectableValues{{pageId}}" class="form-control input-xs" multiple="multiple" size="10">
+					</select>
+				</div>
+				<div class="col-md-2">
+					<div class="row"><span>&nbsp;</span></div>
+					<div class="row">
+						<button class="btn btn-sm col-md-offset-5" type="button"><span class="glyphicon glyphicon-fast-forward"></span></button>
+					</div>
+					<div class="row"><span>&nbsp;</span></div>
+					<div class="row">
+						<button class="btn btn-sm col-md-offset-5" type="button"><span class="glyphicon glyphicon-forward"></span></button>
+					</div>
+					<div class="row"><span>&nbsp;</span></div>
+					<div class="row">
+						<button class="btn btn-sm col-md-offset-5" type="button"><span class="glyphicon glyphicon-backward"></span></button>
+					</div>
+					<div class="row"><span>&nbsp;</span></div>
+					<div class="row">
+						<button class="btn btn-sm col-md-offset-5" type="button"><span class="glyphicon glyphicon-fast-backward"></span></button>
+					</div>
+				</div>
+				<div class="col-md-5">
+					<label>Assigned airspaces:</label> 
+					<select id="assignedValues{{pageId}}" class="form-control input-xs" multiple="multiple" size="10">
+					</select>
+				</div>
+			</div>
+			<div class="row"><div class="col-md-12"></div></div>
+			<div class="row">
+				<div class="col-md-5">
+					<label>Airspace list:</label>
+					<div class="input-group input-group-sm">
+						<input id="filter{{pageId}}" class="form-control" /> 
+						<span class="input-group-btn">
+							<button class="btn btn-default" id="filterSearchButton{{pageId}}" type="button">
+								<span class="glyphicon glyphicon-search">&nbsp;</span>Search
+							</button>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5">
+					<label>Airspace lists:</label> 
+					<select id="selectableValues{{pageId}}" class="form-control input-xs" multiple="multiple" size="10">
+					</select>
+				</div>
+				<div class="col-md-2">
+					<div class="row"><span>&nbsp;</span></div>
+					<div class="row">
+						<button class="btn btn-sm col-md-offset-5" type="button"><span class="glyphicon glyphicon-fast-forward"></span></button>
+					</div>
+					<div class="row"><span>&nbsp;</span></div>
+					<div class="row">
+						<button class="btn btn-sm col-md-offset-5" type="button"><span class="glyphicon glyphicon-forward"></span></button>
+					</div>
+					<div class="row"><span>&nbsp;</span></div>
+					<div class="row">
+						<button class="btn btn-sm col-md-offset-5" type="button"><span class="glyphicon glyphicon-backward"></span></button>
+					</div>
+					<div class="row"><span>&nbsp;</span></div>
+					<div class="row">
+						<button class="btn btn-sm col-md-offset-5" type="button"><span class="glyphicon glyphicon-fast-backward"></span></button>
+					</div>
+				</div>
+				<div class="col-md-5">
+					<label>Assigned airspace lists:</label> 
+					<select id="assignedValues{{pageId}}" class="form-control input-xs" multiple="multiple" size="10">
+					</select>
+				</div>
+			</div>
+		</div>
+		<div id="parameterFeatureTypesId" class="tab-pane">
+			<div class="row">
+				<div class="col-md-5">
+					<label>Feature type:</label>
+					<div class="input-group input-group-sm">
+						<input id="filter{{pageId}}" class="form-control" /> 
+						<span class="input-group-btn">
+							<button class="btn btn-default search" id="filterSearchButton{{pageId}}" type="button">
+								<span class="glyphicon glyphicon-search">&nbsp;</span>Search
+							</button>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5">
+					<label>Feature types:</label> 
+					<select id="selectableValues{{pageId}}" class="form-control input-xs" multiple="multiple" size="10">
+					</select>
+				</div>
+				<div class="col-md-2">
+					<div class="row"><span>&nbsp;</span></div>
+					<div class="row">
+						<button class="btn btn-sm col-md-offset-5" type="button"><span class="glyphicon glyphicon-fast-forward"></span></button>
+					</div>
+					<div class="row"><span>&nbsp;</span></div>
+					<div class="row">
+						<button class="btn btn-sm col-md-offset-5" type="button"><span class="glyphicon glyphicon-forward"></span></button>
+					</div>
+					<div class="row"><span>&nbsp;</span></div>
+					<div class="row">
+						<button class="btn btn-sm col-md-offset-5" type="button"><span class="glyphicon glyphicon-backward"></span></button>
+					</div>
+					<div class="row"><span>&nbsp;</span></div>
+					<div class="row">
+						<button class="btn btn-sm col-md-offset-5" type="button"><span class="glyphicon glyphicon-fast-backward"></span></button>
+					</div>
+				</div>
+				<div class="col-md-5">
+					<label>Assigned feature types:</label> 
+					<select id="assignedValues{{pageId}}" class="form-control input-xs" multiple="multiple" size="10">
+					</select>
+				</div>
+			</div>
+			<div class="row"><div class="col-md-12"></div></div>
+			<div class="row">
+				<div class="col-md-5">
+					<label>Feature type list:</label>
+					<div class="input-group input-group-sm">
+						<input id="filter{{pageId}}" class="form-control" /> 
+						<span class="input-group-btn">
+							<button class="btn btn-default" id="filterSearchButton{{pageId}}" type="button">
+								<span class="glyphicon glyphicon-search">&nbsp;</span>Search
+							</button>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5">
+					<label>Feature type lists:</label> 
+					<select id="selectableValues{{pageId}}" class="form-control input-xs" multiple="multiple" size="10">
+					</select>
+				</div>
+				<div class="col-md-2">
+					<div class="row"><span>&nbsp;</span></div>
+					<div class="row">
+						<button class="btn btn-sm col-md-offset-5" type="button"><span class="glyphicon glyphicon-fast-forward"></span></button>
+					</div>
+					<div class="row"><span>&nbsp;</span></div>
+					<div class="row">
+						<button class="btn btn-sm col-md-offset-5" type="button"><span class="glyphicon glyphicon-forward"></span></button>
+					</div>
+					<div class="row"><span>&nbsp;</span></div>
+					<div class="row">
+						<button class="btn btn-sm col-md-offset-5" type="button"><span class="glyphicon glyphicon-backward"></span></button>
+					</div>
+					<div class="row"><span>&nbsp;</span></div>
+					<div class="row">
+						<button class="btn btn-sm col-md-offset-5" type="button"><span class="glyphicon glyphicon-fast-backward"></span></button>
+					</div>
+				</div>
+				<div class="col-md-5">
+					<label>Assigned feature type lists:</label> 
+					<select id="assignedValues{{pageId}}" class="form-control input-xs" multiple="multiple" size="10">
+					</select>
+				</div>
+			</div>
+		</div>
+		<div id="parameterDownloadId" class="tab-pane">
+			<div class="row">
+				<div id="wFilterIndicator" class="col-md-3">
+					<label>{{domainDownloadStatus.domainName}}:</label>
+					<select class="form-control input-sm">		
+						<option data-ng-repeat="domain in domainDownloadStatus.domainValues " value="{{domain.value}}">{{domain.value}} - {{domain.meaning}}</option>
+					</select>
+				</div>
+				<div id="wFilterFrom" class="col-md-3">
+					<label>From:</label><input id="wFilterFromValue" class="form-control input-sm" />
+				</div>
+				<div id="wFilterTo" class="col-md-4">
+					<label>To:</label>
+					<div class="input-group input-group-sm">
+						<input id="wFilterToValue" class="form-control input-sm" />
+				 		<span class="input-group-btn">
+							<button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-search">&nbsp;</span>Search</button>
+						</span>
+					</div>		
+				</div>
+			</div>
+			<div class="row"><div class="col-md-12">&nbsp;</div></div>
+			<div class="row">
+				<div class="col-md-6"><span>Downloads:</span></div>
+				<div class="col-md-6">
+					<button type="button" data-ng-click="stop()" class="btn btn-default btn-sm pull-right"><span class="glyphicon glyphicon-stop"></span></button>
+					<button type="button" data-ng-click="reschedule()" class="btn btn-default btn-sm pull-right"><span class="glyphicon glyphicon-retweet"></span></button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div id="downloadTable" class="table-responsive">
+						<table  class="table table-hover">
+							<thead>
+								<tr>
+									<th data-ng-click="setOrder('name')">Parameter set</th>
+									<th data-ng-click="setOrder('system')">System</th>
+									<th data-ng-click="setOrder('effectiveDate')">Effective date</th>
+									<th data-ng-click="setOrder('scheduledDate')">Schedule date</th>
+									<th data-ng-click="setOrder('downloadDate')">Download date</th>
+									<th data-ng-click="setOrder('status')">Status</th>
+								<tr>
+							</thead>
+							<tbody>
+								<tr data-ng-repeat="download in downloads | orderBy:orderby:reverse">
+									<td>{{download.name}}</td>
+									<td>{{download.system}}</td>
+									<td>{{download.effectiveDate}}</td>
+									<td>{{download.scheduledDate}}</td>
+									<td>{{download.downloadDate}}</td>
+									<td>{{download.status}}</td>
+								<tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</form>

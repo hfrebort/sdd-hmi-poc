@@ -1,0 +1,76 @@
+<div class="row">
+	<form name="massageForm" data-ng-submit="submitMessageForm()">
+		<div class="col-md-3">
+			<label>{{domainMessageIndicator.domainName}}:</label>
+			<select data-ng-model="messagefilter.filterIndicator"
+				data-ng-options="o.value as o.meaning for o in domainMessageIndicator.domainValues"
+				class="form-control input-sm">		
+			</select>
+		</div>
+		<div class="col-md-3">
+			<label>From:</label>
+			<input type="date" 
+				data-ng-model="messagefilter.filterFrom" 
+				required 
+				class="form-control input-sm" />
+		</div>
+		<div class="col-md-4">
+			<label>To:</label>
+			<div class="input-group input-group-sm">
+				<input type="date" 
+					data-ng-model="messagefilter.filterTo"
+					required 					 
+					class="form-control input-sm" />
+		 		<span class="input-group-btn">
+					<button type="submit" 
+						data-ng-disabled="massageForm.$invalid" 
+						class="btn btn-default btn-sm">
+						<span class="glyphicon glyphicon-search">&nbsp;</span>
+						Search
+					</button>
+				</span>
+			</div>		
+		</div>
+	</form>
+</div>
+<div class="row"><div class="col-md-12">&nbsp;</div></div>
+<div class="row">
+	<div class="col-md-6"><span>Messages:</span></div>
+	<div class="col-md-6">
+		<button type="button" class="btn btn-default btn-sm pull-right"><span class="glyphicon glyphicon-export"></span></button>
+		<button data-ng-click="acknowledgeAllMessages()"  
+				type="button" class="btn btn-default btn-sm pull-right"><span class="glyphicon glyphicon-ok"></span></button>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+	<div id="messagesTable" class="table-responsive">
+		<table  class="table table-hover">
+			<thead>
+				<tr>
+					<th><input type="checkbox" class="form-control input-sm" ng-model="acknowledge" ng-click="clickAllOrNothing()" /></th>
+					<th data-ng-click="setOrder('created')">Created</th>
+					<th data-ng-click="setOrder('text')">Text</th>
+				<tr>
+			</thead>
+			<tbody> <!-- | filter:{{messagefilter.filterFrom|date:'dd-MMM-yyyy HH:mm'}} >= {{message.created|date:'dd-MMM-yyyy HH:mm'}}  -->
+				<tr data-ng-repeat="message in messages | orderBy:orderby:reverse">
+					<td><input type="checkbox" class="form-control input-sm" data-ng-model="message.acknowledged" data-ng-true-value="A" data-ng-false-value="N" /></td>				
+					<td>{{message.created}}</td>
+					<td>{{message.text}}</td>
+				<tr>
+			</tbody>
+		</table>
+	</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="alert alert-danger" data-ng-show="massageForm.$dirty && massageForm.$invalid">
+			<small class="error" data-ng-show="massageForm.$error.required">
+			       From is required.
+			</small>
+	    </div>
+    </div>
+</div>

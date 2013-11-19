@@ -1,0 +1,118 @@
+<form name="parameterSearchForm" data-ng-submit="searchParameterSets()" > 
+	<div class="row">
+		<div class="col-md-6">
+		<label>{{domainSystem.domainName}}:</label>
+		<select data-ng-model="psFilter.filterSystem"
+			data-ng-options="d.value as d.meaning for d in domainSystem.domainValues"
+			class="form-control input-sm">		
+			<option value=""></option>
+		</select>
+		</div>
+		<div class="col-md-6">
+		<label>{{domainActive.domainName}}:</label>
+		<select data-ng-model="psFilter.filterActive"
+			data-ng-options="d.value as d.meaning for d in domainActive.domainValues"
+			class="form-control input-sm">		
+			<option value=""></option>
+		</select>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<label>Name:</label><input data-ng-model="psFilter.filterName" class="form-control input-sm" placeholder="Parameter set name" />		
+		</div>
+		<div class="col-md-6">
+			<label>Created for:</label><input data-ng-model="psFilter.filterCreatedFor" class="form-control input-sm" placeholder="User name" />
+		</div>
+	</div>
+	<div class="row"><div class="col-md-12">&nbsp;</div></div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<button type="button" data-ng-click="clearFilter()" class="btn btn-default btn-sm">
+			<span class="glyphicon glyphicon-remove">&nbsp;</span>Clear all</button>
+			<button type="submit" class="btn btn-default btn-sm pull-right">
+			<span class="glyphicon glyphicon-search">&nbsp;</span>Search</button>
+		</div>
+	</div>
+</form>
+<div class="row"><div class="col-md-12">&nbsp;</div></div>
+<!--
+<div class="row">
+	<div class="col-md-12">
+		Parameter Sets: <span class="badge" data-ng-show="parametersets.length != 0">{{parametersets.length}}</span>
+ 		<button type="button"
+			data-ng-click="newBasedOn()"
+			data-ng-disabled="selectedParameterset === null"
+			class="btn btn-default btn-sm pull-right">
+			<span class="glyphicon glyphicon-floppy-open"></span>
+		</button>
+	</div>
+</div>
+ -->
+ <!-- pagination with buttons and input field -->
+ <!-- 
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="input-group input-group-sm">
+			<span class="input-group-btn">
+				<button type="button" 
+					data-ng-click="prevParameterSets()"
+					class="btn btn-default">
+					<span class="glyphicon glyphicon-chevron-left"></span> Previous
+				</button>
+			</span>
+			<input type="text" data-ng-model="showOffset" class="form-control input-xs" />
+			<span class="input-group-btn">
+				<button type="button"
+				 	data-ng-disabled="!hasMoreEntries()"
+					data-ng-click="nextParameterSets()"
+					class="btn btn-default"> Next
+					<span class="glyphicon glyphicon-chevron-right"></span>
+				</button>
+			</span>
+		</div>
+	</div>
+</div>		
+-->
+
+<div>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th class="col-md-8">
+					<span data-ng-click="setOrder('name')">Name</span>
+					<span data-ng-show="parametersets.length != 0" data-ng-click="nextParameterSets()" class="glyphicon glyphicon-chevron-right pull-right">&nbsp;</span>
+					<span data-ng-show="parametersets.length != 0" data-ng-click="prevParameterSets()" class="glyphicon glyphicon-chevron-left pull-right">&nbsp;</span>
+					<span data-ng-show="parametersets.length != 0" class="pull-right">{{parametersets.length}}&nbsp;</span>&nbsp;
+					<span data-ng-show="parametersets.length != 0" class="pull-right">Show {{showLimit-showOffset}} to {{showLimit}} of &nbsp;</span>
+				</th>
+				<th data-ng-click="setOrder('active')">
+					<span class="pull-right">Active</span>
+				</th>
+				<th>
+				</th>
+			<tr>
+		</thead>
+		<tbody>
+			<tr class="busyIndicator" data-ng-show="loading"><td colspan="3">&nbsp;</td></tr>
+			<tr data-ng-repeat="ps in parametersets | filter:psFilter.filterSystem:true | filter:psFilter.filterActive:true | filter:psFilter.filterName | filter:psFilter.filterCreatedFor | orderBy:orderby:reverse | limitTo: showLimit | limitTo: -1*showOffset"
+				data-ng-click="selectParameterSet(ps)" 
+				data-ng-dblclick="showParameterSet(ps)"
+				data-ng-show="!loading">
+				<td>{{ps.name}}</td>
+				<td>
+					<span
+						data-ng-click="inverseActive(ps)" 
+						data-ng-class="{'pull-right':true,glyphicon:true,'glyphicon-ok':{{ps.active=='A'}}}">&nbsp;
+					</span>
+				</td>
+				<td>
+					<button type="button" data-ng-click="addView(ps)" class="btn btn-xs pull-right">
+					<span class="glyphicon glyphicon-floppy-open"></span>
+					</button>
+				</td>
+			<tr>
+		</tbody>
+	</table>
+</div>
